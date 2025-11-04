@@ -10,16 +10,14 @@ upper_bound: int = 2
 
 accepted, err = quad(f, lower_bound, upper_bound)
 
-def linear_transform(f, a: float, b: float) -> callable:
+def linear_transform(f: callable, a: float, b: float) -> callable:
     def func(u: float) -> float:
         return f(((b-a) * u + (b+a))/2)*(b-a)/2
     return func
 
-def simpson(f, a: float, b: float, n: int) -> float:
-    h: float = (b - a) / n
-    arr1 = [f(a + (2 * i * h)) for i in range(1, (int)(n/2))]
-    arr2 = [f(a + ((2 * i) - 1) * h ) for i in range(1, (int)(n/2) + 1)]
-    return (h/3)*(f(a) + (2 * sum(arr1)) + (4 * sum(arr2)) + f(b))
+def simpson(f: callable, a: float, b: float, n: int) -> float:
+    h: float = (b-a)/n
+    return (h/3)*(f(a) + (2 * sum([f(a + (2 * i * h)) for i in range(1, (int)(n/2))])) + (4 * sum([f(a + ((2 * i) - 1) * h) for i in range(1, (int)(n/2) + 1)])) + f(b))
 
 def gauss_quad(f: callable, a: float, b: float) -> float:
     c1 = 0.3478548451
