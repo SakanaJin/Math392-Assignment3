@@ -1,4 +1,5 @@
 from scipy.integrate import quad
+from typing import Callable
 import math
 
 def f(x: float) -> float:
@@ -10,16 +11,16 @@ upper_bound: int = 2
 
 accepted, err = quad(f, lower_bound, upper_bound)
 
-def linear_transform(f: callable, a: float, b: float) -> callable:
+def linear_transform(f: Callable[[float], float], a: float, b: float) -> Callable[[float], float]:
     def func(u: float) -> float:
         return f(((b-a) * u + (b+a))/2)*(b-a)/2
     return func
 
-def simpson(f: callable, a: float, b: float, n: int) -> float:
+def simpson(f: Callable[[float], float], a: float, b: float, n: int) -> float:
     h: float = (b-a)/n
     return (h/3)*(f(a) + (2 * sum([f(a + (2 * i * h)) for i in range(1, (int)(n/2))])) + (4 * sum([f(a + ((2 * i) - 1) * h) for i in range(1, (int)(n/2) + 1)])) + f(b))
 
-def gauss_quad(f: callable, a: float, b: float) -> float:
+def gauss_quad(f: Callable[[float], float], a: float, b: float) -> float:
     c1 = 0.3478548451
     c2 = 0.6521451549
     x1 = 0.8611363116
