@@ -18,8 +18,6 @@ def linear_transform(f: Callable[[float], float], a: float, b: float) -> Callabl
 
 def legendre_polyfind(n: int, x: float) -> tuple[float, float]:
     '''Returns the nth and n-1th legendre polynomial evaluated at x'''
-    if n == 0:
-        return 1.0, 0.0 
     P0 = 1.0
     P1 = x
     for i in range(1, n):
@@ -41,6 +39,8 @@ def gauss_quad(f: Callable[[float], float], a: float, b: float) -> float:
     return c1 * f(-x1) + c2 * f(-x2) + c2 * f(x2) + c1 * f(x1)
 
 def cooler_gauss_quad(f: Callable[[float], float], a: float, b: float, n: int) -> float:
+    if n == 0:
+        raise ValueError(":( n should be an integer greater than zero")
     MAXITER = 10
     TOL = 1e-14
     roots = []
