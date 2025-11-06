@@ -66,12 +66,16 @@ if __name__ == "__main__":
 
     simpsons_err = abs(accepted - simpsons)
     gauss_err = abs(accepted - gauss)
-
+    
     print(f"{accepted=:.7f}")
-    print(f"{simpsons=:.7f}\t{simpsons_err=:.7f}")
-    print(f"{gauss=:.7f}\t{gauss_err=:.7f}")
-
+    print("="*47)
+    print(f"|| {'Method':^11} || {'Value':^11} || {'Error':^11} ||")
+    print("="*47)
+    print(f"|| {'Simpsons':^11} || {simpsons:^11.7f} || {simpsons_err:^11.7f} ||")
+    print(f"|| {'Gauss n4':^11} || {gauss:^11.7f} || {gauss_err:^11.7f} ||")
+    print(f"{'My Gauss Method':=^47}")    
     for i in range(1, 8):
         cooler_gauss = cooler_gauss_quad(f, lower_bound, upper_bound, i)
         cooler_err = abs(accepted - cooler_gauss)
-        print(f"{cooler_gauss=:.7f}\t{cooler_err=:.7f}")
+        print(f"|| {f'Gauss n{i}':^11} || {cooler_gauss:^11.7f} || {cooler_err:^11.7f} ||")
+    print("="*47)
