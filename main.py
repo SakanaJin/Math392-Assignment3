@@ -66,16 +66,25 @@ if __name__ == "__main__":
 
     simpsons_err = abs(accepted - simpsons)
     gauss_err = abs(accepted - gauss)
+
+    simpson_relerr = (simpsons_err / accepted) * 100
+    gauss_relerr = (gauss_err / accepted) * 100
     
     print(f"{accepted=:.7f}")
-    print("="*47)
-    print(f"|| {'Method':^11} || {'Value':^11} || {'Error':^11} ||")
-    print("="*47)
-    print(f"|| {'Simpsons':^11} || {simpsons:^11.7f} || {simpsons_err:^11.7f} ||")
-    print(f"|| {'Gauss n4':^11} || {gauss:^11.7f} || {gauss_err:^11.7f} ||")
-    print(f"{'My Gauss Method':=^47}")    
+    print("="*62)
+    print(f"|| {'Method':^11} || {'Value':^11} || {'Abs Error':^11} || {'Rel Error':^11} ||")
+    print("="*62)
+    print(f"|| {'Simpsons':^11} || {simpsons:^11.7f} || {simpsons_err:^11.7f} || {simpson_relerr:^11.7f} ||")
+    print(f"|| {'Gauss n4':^11} || {gauss:^11.7f} || {gauss_err:^11.7f} || {gauss_relerr:^11.7f} ||")
+    print(f"{'My Gauss Method':=^62}")    
     for i in range(1, 8):
         cooler_gauss = cooler_gauss_quad(f, lower_bound, upper_bound, i)
         cooler_err = abs(accepted - cooler_gauss)
-        print(f"|| {f'Gauss n{i}':^11} || {cooler_gauss:^11.7f} || {cooler_err:^11.7f} ||")
-    print("="*47)
+        cooler_relerr = (cooler_err / accepted) * 100
+        print(f"|| {f'Gauss n{i}':^11} || {cooler_gauss:^11.7f} || {cooler_err:^11.7f} || {cooler_relerr:^11.7f} ||")
+    print("="*62)
+
+    #Both gauss methods got closer to the true solution than the composite simpsons method.
+    #The gauss method with the n4 values already given is definitely the fastest computationally, but simpsons is faster than the general gauss
+    #I prefer the general gauss since it finds a more precise solution and you can control n. I think the slight computational difference is fine.
+    #To improve my approximation I could increase n for the gauss and or improve how the general gauss is approximating the roots of the legendre polynomial

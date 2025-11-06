@@ -1,5 +1,6 @@
 You can run this code in colab simply by copy pasting. I coded this assignment in python 3.12, but if there's any
 version errors the only dependency is scipy. There shouldn't be any issues between versions, so should be fine.
+I put my answer to number four at the end of the main.py file
 
 Below is instructions for running the program with a virtual environment.
 
